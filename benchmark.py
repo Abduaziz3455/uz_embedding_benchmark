@@ -69,6 +69,7 @@ def run_local_benchmark(
     query_prompt_name: str | None = None,
     passage_prompt_name: str | None = None,
     st_task: str | None = None,
+    transliterate_mode: str | None = None,
 ) -> dict:
     from models import SentenceTransformerClient
 
@@ -83,8 +84,16 @@ def run_local_benchmark(
     corpus_ids = [p["id"] for p in corpus]
     query_ids = [q["id"] for q in queries]
 
-    corpus_texts = [f"{passage_prefix}{p['text']}" for p in corpus]
-    query_texts = [f"{query_prefix}{q['text']}" for q in queries]
+    raw_corpus = [p["text"] for p in corpus]
+    raw_queries = [q["text"] for q in queries]
+    if transliterate_mode:
+        from transliterate import apply as _translit_apply
+        console.print(f"  Transliteration: {transliterate_mode}")
+        raw_corpus = _translit_apply(transliterate_mode, raw_corpus)
+        raw_queries = _translit_apply(transliterate_mode, raw_queries)
+
+    corpus_texts = [f"{passage_prefix}{t}" for t in raw_corpus]
+    query_texts = [f"{query_prefix}{t}" for t in raw_queries]
 
     console.print(f"\n[bold]Embedding {len(corpus_texts)} passages...[/bold]")
     corpus_embs, corpus_time = client.embed_timed(
@@ -167,6 +176,7 @@ def main():
     parser.add_argument("--query-prompt-name", default=None, help="ST prompt_name for queries")
     parser.add_argument("--passage-prompt-name", default=None, help="ST prompt_name for passages")
     parser.add_argument("--st-task", default=None, help="ST task kwarg (e.g. 'retrieval' for jina v5)")
+    parser.add_argument("--transliterate", default=None, help="Transliteration mode (e.g. 'latin2cyrillic')")
 
     parser.add_argument("--dataset", default=DEFAULT_DATASET, help="Path to dataset JSON")
     parser.add_argument("--output", help="Output JSON path (auto-generated if not set)")
@@ -203,6 +213,7 @@ def main():
             query_prompt_name=args.query_prompt_name,
             passage_prompt_name=args.passage_prompt_name,
             st_task=args.st_task,
+            transliterate_mode=args.transliterate,
         )
 
     console.print("\n[bold]Computing similarities and rankings...[/bold]")

@@ -151,6 +151,7 @@ def main():
     parser.add_argument("--query-prompt-name", default=None)
     parser.add_argument("--passage-prompt-name", default=None)
     parser.add_argument("--st-task", default=None)
+    parser.add_argument("--transliterate", default=None)
     parser.add_argument("--dataset", default=DEFAULT_DATASET)
     parser.add_argument("--output", help="Output JSON path (auto-generated if not set)")
     parser.add_argument("--batch-size", type=int, default=32)
@@ -186,6 +187,7 @@ def main():
             query_prompt_name=args.query_prompt_name,
             passage_prompt_name=args.passage_prompt_name,
             st_task=args.st_task,
+            transliterate_mode=args.transliterate,
         )
 
     console.print("\n[bold]Computing similarities and rankings...[/bold]")

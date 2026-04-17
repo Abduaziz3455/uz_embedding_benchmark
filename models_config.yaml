@@ -7,6 +7,7 @@
 #   query_prefix / passage_prefix: string prefixes (e5 family, nomic v2)
 #   query_prompt_name / passage_prompt_name: sentence-transformers prompt names
 #   st_task: sentence-transformers `task` kwarg (e.g. 'retrieval' for jina v5)
+#   transliterate: transliteration mode (e.g. 'latin2cyrillic' for Cyrillic-only models)
 #   batch_size: int override                (default: 32)
 
 models:
@@ -76,9 +77,28 @@ models:
   qwen3-embedding-0.6b:
     hf_name: Qwen/Qwen3-Embedding-0.6B
 
+  gte-multilingual-base:
+    hf_name: Alibaba-NLP/gte-multilingual-base
+    trust_remote_code: true
+
+  kalm-embedding-mini-instruct-v2.5:
+    hf_name: KaLM-Embedding/KaLM-embedding-multilingual-mini-instruct-v2.5
+    trust_remote_code: true
+    query_prompt_name: query
+
+  kalm-embedding-mini-v1:
+    hf_name: HIT-TMG/KaLM-embedding-multilingual-mini-v1
+    trust_remote_code: true
+
   # ─── Lower tier / baselines ──────────────────────────────────────────────
   embeddinggemma-300m:
     hf_name: google/embeddinggemma-300m
+
+  granite-embedding-278m-multilingual:
+    hf_name: ibm-granite/granite-embedding-278m-multilingual
+
+  granite-embedding-107m-multilingual:
+    hf_name: ibm-granite/granite-embedding-107m-multilingual
 
   paraphrase-multilingual:
     hf_name: sentence-transformers/paraphrase-multilingual-mpnet-base-v2
@@ -92,3 +112,14 @@ models:
   tahrirchi-bert-base:
     hf_name: tahrirchi/tahrirchi-bert-base
     trust_remote_code: true
+
+  # ─── Uzbek-specific fine-tunes ───────────────────────────────────────────
+  modern-uz-bert:
+    hf_name: Orzumurod/ModernUzBERT
+
+  uz-embeddinggemma-300m:
+    hf_name: Saidakmal/uz_embeddinggemma-300m
+
+  bge-m3-uzbek-cyrillic:
+    hf_name: Just-Bax/bge-m3-uzbek-cyrillic
+    transliterate: latin2cyrillic

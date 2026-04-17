@@ -67,6 +67,7 @@ def build_cmd(key: str, spec: dict, hard: bool, dataset: str, batch_override: in
         ("--query-prompt-name", "query_prompt_name"),
         ("--passage-prompt-name", "passage_prompt_name"),
         ("--st-task", "st_task"),
+        ("--transliterate", "transliterate"),
     ]:
         val = spec.get(field)
         if val is not None and val != "":
@@ -97,6 +98,8 @@ def cmd_list(args):
             notes.append(f"prompt={spec['query_prompt_name']}")
         if spec.get("st_task"):
             notes.append(f"task={spec['st_task']}")
+        if spec.get("transliterate"):
+            notes.append(f"translit={spec['transliterate']}")
         if spec.get("batch_size"):
             notes.append(f"bs={spec['batch_size']}")
         table.add_row(key, runtime, spec.get("hf_name", "—"), ", ".join(notes))

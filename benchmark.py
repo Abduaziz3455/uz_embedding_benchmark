@@ -70,15 +70,14 @@ def run_local_benchmark(
     passage_prompt_name: str | None = None,
     st_task: str | None = None,
     transliterate_mode: str | None = None,
-    max_seq_length: int | None = None,
 ) -> dict:
     from models import SentenceTransformerClient
 
     client = SentenceTransformerClient(
         model_name, batch_size=batch_size, trust_remote_code=trust_remote_code,
-        device=device, max_seq_length=max_seq_length,
+        device=device,
     )
-    console.print(f"  Device: {client.device}  max_seq_length: {client.max_seq_length}")
+    console.print(f"  Device: {client.device}")
 
     corpus = dataset["corpus"]
     queries = dataset["queries"]
@@ -178,7 +177,6 @@ def main():
     parser.add_argument("--passage-prompt-name", default=None, help="ST prompt_name for passages")
     parser.add_argument("--st-task", default=None, help="ST task kwarg (e.g. 'retrieval' for jina v5)")
     parser.add_argument("--transliterate", default=None, help="Transliteration mode (e.g. 'latin2cyrillic')")
-    parser.add_argument("--max-seq-length", type=int, default=None, help="Cap tokenizer truncation length")
 
     parser.add_argument("--dataset", default=DEFAULT_DATASET, help="Path to dataset JSON")
     parser.add_argument("--output", help="Output JSON path (auto-generated if not set)")
@@ -216,7 +214,6 @@ def main():
             passage_prompt_name=args.passage_prompt_name,
             st_task=args.st_task,
             transliterate_mode=args.transliterate,
-            max_seq_length=args.max_seq_length,
         )
 
     console.print("\n[bold]Computing similarities and rankings...[/bold]")

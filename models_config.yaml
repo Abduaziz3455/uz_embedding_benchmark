@@ -78,11 +78,6 @@ models:
   qwen3-embedding-0.6b:
     hf_name: Qwen/Qwen3-Embedding-0.6B
 
-  gte-multilingual-base:
-    hf_name: Alibaba-NLP/gte-multilingual-base
-    trust_remote_code: true
-    max_seq_length: 8192
-
   kalm-embedding-mini-instruct-v2.5:
     hf_name: KaLM-Embedding/KaLM-embedding-multilingual-mini-instruct-v2.5
     trust_remote_code: true

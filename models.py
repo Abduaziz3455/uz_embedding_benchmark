@@ -140,7 +140,6 @@ class SentenceTransformerClient:
         batch_size: int = 32,
         device: str | None = None,
         trust_remote_code: bool = False,
-        max_seq_length: int | None = None,
     ):
         SentenceTransformer = _lazy_st()
         _apply_transformers_v5_compat()
@@ -157,12 +156,9 @@ class SentenceTransformerClient:
         self.model = SentenceTransformer(
             model_name, device=device, trust_remote_code=trust_remote_code
         )
-        if max_seq_length is not None:
-            self.model.max_seq_length = max_seq_length
         self.model_name = model_name
         self.batch_size = batch_size
         self.device = device
-        self.max_seq_length = getattr(self.model, "max_seq_length", None)
         self.name = model_name.split("/")[-1]
 
     def embed(

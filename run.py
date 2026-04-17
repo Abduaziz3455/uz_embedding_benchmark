@@ -68,7 +68,6 @@ def build_cmd(key: str, spec: dict, hard: bool, dataset: str, batch_override: in
         ("--passage-prompt-name", "passage_prompt_name"),
         ("--st-task", "st_task"),
         ("--transliterate", "transliterate"),
-        ("--max-seq-length", "max_seq_length"),
     ]:
         val = spec.get(field)
         if val is not None and val != "":

@@ -1,0 +1,16 @@
+{
+  "model_name": "multilingual-e5-small",
+  "embedding_dim": 384,
+  "dataset": "/Users/abduaziz/Desktop/uz_embedding_benchmark/dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "num_with_hard_negatives": 2017,
+  "hard_negative_metrics": {
+    "triplet_accuracy": 0.9738497837200157,
+    "discrimination_rate": 0.9444719881011403,
+    "avg_margin": 0.04235235697335398,
+    "restricted_mrr": 0.9705420591637746,
+    "positive_avg_rank": 18.606346058502726,
+    "hard_neg_avg_rank": 410.5825483391175
+  }
+}

@@ -1,0 +1,25 @@
+FROM pytorch/pytorch:2.8.0-cuda12.8-cudnn9-runtime
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    HF_HOME=/root/.cache/huggingface \
+    TRANSFORMERS_CACHE=/root/.cache/huggingface \
+    PIP_NO_CACHE_DIR=1 \
+    PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        git curl ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# torch + CUDA come from the base image
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+
+VOLUME ["/root/.cache/huggingface"]
+
+ENTRYPOINT ["python", "run.py"]
+CMD ["list"]

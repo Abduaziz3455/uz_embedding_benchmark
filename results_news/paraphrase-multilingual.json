@@ -1,0 +1,26 @@
+{
+  "model_name": "paraphrase-multilingual",
+  "embedding_dim": 768,
+  "dataset": "dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "timestamp": "2026-04-16T20:35:09.311480",
+  "metrics": {
+    "mrr": 0.38287127581082014,
+    "hit_rate@1": 0.29796727813584534,
+    "recall@1": 0.29796727813584534,
+    "ndcg@1": 0.29796727813584534,
+    "hit_rate@3": 0.4134853743182945,
+    "recall@3": 0.4134853743182945,
+    "ndcg@3": 0.36546329352291457,
+    "hit_rate@5": 0.466038671294001,
+    "recall@5": 0.466038671294001,
+    "ndcg@5": 0.387249406003363,
+    "hit_rate@10": 0.555280118988597,
+    "recall@10": 0.555280118988597,
+    "ndcg@10": 0.41613514242037375,
+    "avg_latency_ms": 8.280689023308907,
+    "corpus_throughput": 113.85950753430535,
+    "query_throughput": 153.40110090448442
+  }
+}

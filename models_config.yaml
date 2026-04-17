@@ -1,0 +1,94 @@
+# Models to benchmark. Keys here are the CLI names (e.g. `python run.py bench bge-m3`).
+#
+# Fields per model:
+#   runtime: local | gemini                 (default: local)
+#   hf_name: HuggingFace model id           (required for local)
+#   trust_remote_code: bool                 (default: false)
+#   query_prefix / passage_prefix: string prefixes (e5 family, nomic v2)
+#   query_prompt_name / passage_prompt_name: sentence-transformers prompt names
+#   st_task: sentence-transformers `task` kwarg (e.g. 'retrieval' for jina v5)
+#   batch_size: int override                (default: 32)
+
+models:
+  # ─── Tier 1: top performers ──────────────────────────────────────────────
+  gemini-embedding-001:
+    runtime: gemini
+    hf_name: gemini-embedding-001
+
+  multilingual-e5-large-instruct:
+    hf_name: intfloat/multilingual-e5-large-instruct
+
+  bge-m3:
+    hf_name: BAAI/bge-m3
+
+  bge-m3-unsupervised:
+    hf_name: BAAI/bge-m3-unsupervised
+
+  multilingual-e5-large:
+    hf_name: intfloat/multilingual-e5-large
+    query_prefix: "query: "
+    passage_prefix: "passage: "
+
+  # ─── Mid-tier ────────────────────────────────────────────────────────────
+  harrier-oss-v1-0.6b:
+    hf_name: microsoft/harrier-oss-v1-0.6b
+    trust_remote_code: true
+
+  multilingual-e5-base:
+    hf_name: intfloat/multilingual-e5-base
+    query_prefix: "query: "
+    passage_prefix: "passage: "
+
+  jina-embeddings-v5-text-small:
+    hf_name: jinaai/jina-embeddings-v5-text-small
+    trust_remote_code: true
+    st_task: retrieval
+    query_prompt_name: query
+    passage_prompt_name: document
+    batch_size: 16
+
+  jina-embeddings-v5-text-nano:
+    hf_name: jinaai/jina-embeddings-v5-text-nano
+    trust_remote_code: true
+    st_task: retrieval
+    query_prompt_name: query
+    passage_prompt_name: document
+
+  snowflake-arctic-embed2:
+    hf_name: Snowflake/snowflake-arctic-embed-l-v2.0
+
+  Octen-Embedding-0.6B:
+    hf_name: Octen/Octen-Embedding-0.6B
+    trust_remote_code: true
+    query_prompt_name: query
+
+  multilingual-e5-small:
+    hf_name: intfloat/multilingual-e5-small
+    query_prefix: "query: "
+    passage_prefix: "passage: "
+
+  F2LLM-v2-0.6B:
+    hf_name: codefuse-ai/F2LLM-v2-0.6B
+    trust_remote_code: true
+    query_prompt_name: query
+    passage_prompt_name: document
+
+  qwen3-embedding-0.6b:
+    hf_name: Qwen/Qwen3-Embedding-0.6B
+
+  # ─── Lower tier / baselines ──────────────────────────────────────────────
+  embeddinggemma-300m:
+    hf_name: google/embeddinggemma-300m
+
+  paraphrase-multilingual:
+    hf_name: sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+
+  nomic-embed-text-v2-moe:
+    hf_name: nomic-ai/nomic-embed-text-v2-moe
+    trust_remote_code: true
+    query_prefix: "search_query: "
+    passage_prefix: "search_document: "
+
+  tahrirchi-bert-base:
+    hf_name: tahrirchi/tahrirchi-bert-base
+    trust_remote_code: true

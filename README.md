@@ -1,0 +1,170 @@
+# Uzbek Embedding Benchmark
+
+Benchmarks embedding models for Uzbek retrieval-augmented generation (RAG) on
+a dataset of **7,078 passages and 2,017 queries** drawn from real Uzbek news
+articles. Each query comes with one positive passage and three hard negatives.
+
+See [REPORT.md](REPORT.md) for the full results and recommendations.
+
+## TL;DR — two commands
+
+```bash
+./bench bench bge-m3             # benchmark one model (auto CPU/GPU, builds on first run)
+./bench compare                  # show ranked table of all results
+```
+
+That's it. Add `--hard` to any `bench*` / `compare` command to use
+hard-negative analysis instead of standard retrieval metrics.
+
+## What you can do
+
+- Run any configured model with one command.
+- Run all configured models sequentially.
+- Score models on standard retrieval metrics (MRR, Recall@K, NDCG) **and**
+  hard-negative discrimination (the real RAG failure mode).
+- Compare saved results in a ranked table.
+- Bring your own HuggingFace model by editing `models_config.yaml`.
+
+Supported runtimes:
+
+- **Local (HuggingFace / sentence-transformers)** — default. Works on CPU, Apple Silicon (MPS), or CUDA.
+- **Gemini API** — for `gemini-embedding-001`.
+
+## Quick start
+
+### Option A — Docker, auto-GPU (recommended)
+
+The `./bench` wrapper:
+
+1. Checks whether the host has an NVIDIA GPU (`nvidia-smi`).
+2. Picks the right image — a **slim CPU Python image** (~1 GB) on CPU-only hosts,
+   or the **PyTorch CUDA runtime** (~6 GB) on GPU hosts.
+3. Builds the image the first time it's needed, then reuses it.
+4. Runs the benchmark inside the container.
+
+You don't pick; it does. On any machine, everything after `./bench …` is identical.
+
+```bash
+./bench list                     # what's configured
+./bench bench bge-m3             # benchmark one model
+./bench bench bge-m3 --hard      # hard-negative analysis
+./bench bench-all                # every configured model sequentially
+./bench compare                  # ranked comparison of saved results
+./bench compare --hard           # same, hard-negative table
+```
+
+Results land in `./results_news/` on the host. The HuggingFace cache is
+mounted from `~/.cache/huggingface` so downloaded weights are reused across
+runs and across any other project sharing the cache.
+
+GPU requirements (Linux only):
+- NVIDIA driver
+- [nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+  so Docker can see the GPU
+
+Gemini model in Docker:
+
+```bash
+cp .env.example .env
+# edit .env and set GEMINI_API_KEY
+./bench bench gemini-embedding-001
+```
+
+### Option B — Local Python
+
+```bash
+# 1. Create a virtualenv (Python 3.10+ required)
+python3 -m venv .venv && source .venv/bin/activate
+
+# 2. Install dependencies
+pip install torch           # or: pip install torch --index-url https://download.pytorch.org/whl/cu121  (CUDA)
+pip install -r requirements.txt
+
+# 3. List models
+python run.py list
+
+# 4. Benchmark
+python run.py bench bge-m3
+python run.py bench bge-m3 --hard
+python run.py bench-all
+python run.py compare
+python run.py compare --hard
+```
+
+For the Gemini model, set the API key first:
+
+```bash
+cp .env.example .env
+# edit .env and set GEMINI_API_KEY
+export $(cat .env | xargs)
+python run.py bench gemini-embedding-001
+```
+
+## Common workflows
+
+```bash
+# Only benchmark a subset
+python run.py bench-all --only bge-m3,multilingual-e5-large,embeddinggemma-300m
+
+# Skip specific models
+python run.py bench-all --skip tahrirchi-bert-base
+
+# Continue past failures (useful for overnight runs)
+python run.py bench-all --keep-going
+
+# Override batch size (helpful on low-RAM machines)
+python run.py bench bge-m3 --batch-size 8
+```
+
+## Adding a new model
+
+Edit [`models_config.yaml`](models_config.yaml) and append an entry. Keys
+become the CLI names.
+
+```yaml
+models:
+  my-new-model:
+    hf_name: org/repo-name
+    trust_remote_code: true          # if the HF model requires it
+    query_prefix: "query: "          # optional — e5-style prefix
+    passage_prefix: "passage: "
+    query_prompt_name: query         # optional — ST prompt_name
+    passage_prompt_name: document
+    st_task: retrieval               # optional — ST task kwarg
+    batch_size: 16                   # optional — override default 32
+```
+
+Then:
+
+```bash
+python run.py bench my-new-model
+```
+
+## Regenerating the dataset
+
+The dataset is already checked in at `dataset/uz_news_benchmark.json`. If you
+want to regenerate it from the HuggingFace source:
+
+```bash
+python scripts/convert_dovud_dataset.py --split test
+```
+
+## Project layout
+
+```
+bench                    # ./bench <subcommand>  — auto-GPU Docker wrapper
+run.py                   # python run.py <subcommand>  — bare-metal runner
+benchmark.py             # standard retrieval engine
+scripts/hard_negative_analysis.py  # hard-negative analysis engine
+models.py                # embedding clients (sentence-transformers, Gemini)
+metrics.py               # MRR, Recall@K, NDCG@K
+models_config.yaml       # model registry (edit to add models)
+dataset/                 # benchmark dataset JSON
+results_news/            # per-model result JSONs
+scripts/convert_dovud_dataset.py   # rebuild dataset from HF
+Dockerfile               # slim CPU image (python:3.12-slim + cpu torch)
+Dockerfile.gpu           # CUDA image (pytorch/pytorch:…-cuda12.8-cudnn9-runtime)
+docker-compose.yml       # CPU default
+docker-compose.gpu.yml   # override: switches to Dockerfile.gpu + NVIDIA reservation
+REPORT.md                # benchmark results + analysis
+```

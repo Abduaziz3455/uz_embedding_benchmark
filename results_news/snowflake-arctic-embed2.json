@@ -1,0 +1,26 @@
+{
+  "model_name": "snowflake-arctic-embed2",
+  "embedding_dim": 1024,
+  "dataset": "dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "timestamp": "2026-04-16T20:30:04.149907",
+  "metrics": {
+    "mrr": 0.6722913006650952,
+    "hit_rate@1": 0.5770946950917204,
+    "recall@1": 0.5770946950917204,
+    "ndcg@1": 0.5770946950917204,
+    "hit_rate@3": 0.7297967278135845,
+    "recall@3": 0.7297967278135845,
+    "ndcg@3": 0.6664932476290844,
+    "hit_rate@5": 0.7828458106098165,
+    "recall@5": 0.7828458106098165,
+    "ndcg@5": 0.6884711562459901,
+    "hit_rate@10": 0.857709469509172,
+    "recall@10": 0.857709469509172,
+    "ndcg@10": 0.7129390900858751,
+    "avg_latency_ms": 22.089962571084452,
+    "corpus_throughput": 40.489692058546005,
+    "query_throughput": 77.28477066661135
+  }
+}

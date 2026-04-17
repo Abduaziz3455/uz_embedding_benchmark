@@ -1,0 +1,18 @@
+numpy>=1.24.0
+rich>=13.0.0
+pyyaml>=6.0
+
+# Local HF models
+sentence-transformers>=3.0.0
+transformers>=4.40.0
+
+# Bare-metal installs also need torch:
+#   pip install torch                                                   (CPU)
+#   pip install torch --index-url https://download.pytorch.org/whl/cu121  (CUDA)
+# The Dockerfiles install torch for you (CPU wheel in Dockerfile, CUDA base image in Dockerfile.gpu).
+
+# Gemini API (optional, only if you use --gemini)
+google-genai>=1.0.0
+
+# Only needed by scripts/convert_dovud_dataset.py (dataset is already checked in)
+datasets>=2.14.0

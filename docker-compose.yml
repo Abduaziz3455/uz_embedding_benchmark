@@ -1,0 +1,17 @@
+services:
+  benchmark:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: host
+    image: uz-embedding-benchmark:cpu
+    volumes:
+      - ./results_news:/app/results_news
+      - ./dataset:/app/dataset
+      - ./models_config.yaml:/app/models_config.yaml
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    env_file:
+      - path: .env
+        required: false
+    ipc: host
+    command: ["list"]

@@ -1,0 +1,16 @@
+# Override: swaps to the CUDA Dockerfile and reserves an NVIDIA GPU.
+# Used automatically by the ./bench wrapper when nvidia-smi is detected.
+# Manual invocation:
+#   docker compose -f docker-compose.yml -f docker-compose.gpu.yml run --rm benchmark bench bge-m3
+services:
+  benchmark:
+    build:
+      dockerfile: Dockerfile.gpu
+    image: uz-embedding-benchmark:gpu
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Auto-detects NVIDIA GPU, picks the right Docker image (CPU-slim or CUDA),
+# builds on first run, and forwards all args to run.py inside the container.
+#
+# Usage:
+#   ./bench list
+#   ./bench bench bge-m3
+#   ./bench bench bge-m3 --hard
+#   ./bench bench-all
+#   ./bench compare
+#   ./bench compare --hard
+set -euo pipefail
+cd "$(dirname "$0")"
+
+files=(-f docker-compose.yml)
+image="uz-embedding-benchmark:cpu"
+if command -v nvidia-smi >/dev/null 2>&1 && nvidia-smi -L >/dev/null 2>&1; then
+    files+=(-f docker-compose.gpu.yml)
+    image="uz-embedding-benchmark:gpu"
+    echo "→ NVIDIA GPU detected — using CUDA image" >&2
+else
+    echo "→ No NVIDIA GPU — using slim CPU image" >&2
+fi
+
+if ! docker image inspect "$image" >/dev/null 2>&1; then
+    echo "→ First run: building $image (one-time)…" >&2
+    docker compose "${files[@]}" build
+fi
+
+exec docker compose "${files[@]}" run --rm benchmark "$@"

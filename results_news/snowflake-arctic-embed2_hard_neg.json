@@ -1,0 +1,16 @@
+{
+  "model_name": "snowflake-arctic-embed2",
+  "embedding_dim": 1024,
+  "dataset": "dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "num_with_hard_negatives": 2017,
+  "hard_negative_metrics": {
+    "triplet_accuracy": 0.9349193865513173,
+    "discrimination_rate": 0.8755577590480912,
+    "avg_margin": 0.13826343842704047,
+    "restricted_mrr": 0.9316228722525202,
+    "positive_avg_rank": 16.82796232027764,
+    "hard_neg_avg_rank": 111.52751611303917
+  }
+}

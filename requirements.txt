@@ -5,6 +5,7 @@ pyyaml>=6.0
 # Local HF models
 sentence-transformers>=3.0.0
 transformers>=4.40.0
+peft>=0.11.0  # required by jina-embeddings-v5 custom modeling code
 
 # Bare-metal installs also need torch:
 #   pip install torch                                                   (CPU)

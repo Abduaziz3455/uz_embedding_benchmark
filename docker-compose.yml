@@ -5,6 +5,9 @@ services:
       dockerfile: Dockerfile
       network: host
     image: uz-embedding-benchmark:cpu
+    # Use host networking: the container doesn't expose ports, and this avoids
+    # brittle iptables/bridge errors on some Linux hosts.
+    network_mode: host
     volumes:
       - ./results_news:/app/results_news
       - ./dataset:/app/dataset

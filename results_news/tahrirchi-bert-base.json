@@ -1,26 +1,26 @@
 {
   "model_name": "tahrirchi-bert-base",
   "embedding_dim": 768,
-  "dataset": "dataset/uz_news_benchmark.json",
+  "dataset": "/app/dataset/uz_news_benchmark.json",
   "num_corpus": 7078,
   "num_queries": 2017,
-  "timestamp": "2026-04-16T20:21:17.081399",
+  "timestamp": "2026-04-17T17:50:34.330833",
   "metrics": {
-    "mrr": 0.09213796466277062,
+    "mrr": 0.09213799148134798,
     "hit_rate@1": 0.05007436787307883,
     "recall@1": 0.05007436787307883,
     "ndcg@1": 0.05007436787307883,
     "hit_rate@3": 0.0961824491819534,
     "recall@3": 0.0961824491819534,
-    "ndcg@3": 0.07637406429279765,
+    "ndcg@3": 0.07637406429279754,
     "hit_rate@5": 0.11898859692612791,
     "recall@5": 0.11898859692612791,
-    "ndcg@5": 0.08580504800934538,
+    "ndcg@5": 0.08580504800934526,
     "hit_rate@10": 0.16063460585027267,
     "recall@10": 0.16063460585027267,
-    "ndcg@10": 0.0995119349647865,
-    "avg_latency_ms": 5.102811879163517,
-    "corpus_throughput": 163.5004625156522,
-    "query_throughput": 646.5413702920516
+    "ndcg@10": 0.09951193496478641,
+    "avg_latency_ms": 1.4538039098513722,
+    "corpus_throughput": 577.5691219718642,
+    "query_throughput": 2084.6762992751082
   }
 }

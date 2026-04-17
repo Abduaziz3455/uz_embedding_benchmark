@@ -1,0 +1,26 @@
+{
+  "model_name": "KaLM-embedding-multilingual-mini-v1",
+  "embedding_dim": 896,
+  "dataset": "/app/dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "timestamp": "2026-04-17T20:03:02.272542",
+  "metrics": {
+    "mrr": 0.594588502413692,
+    "hit_rate@1": 0.49429846306395636,
+    "recall@1": 0.49429846306395636,
+    "ndcg@1": 0.49429846306395636,
+    "hit_rate@3": 0.6549330689142291,
+    "recall@3": 0.6549330689142291,
+    "ndcg@3": 0.5885071726644971,
+    "hit_rate@5": 0.7099652949925632,
+    "recall@5": 0.7099652949925632,
+    "ndcg@5": 0.6114912649641825,
+    "hit_rate@10": 0.782350024789291,
+    "recall@10": 0.782350024789291,
+    "ndcg@10": 0.6349518009090676,
+    "avg_latency_ms": 8.961430817142071,
+    "corpus_throughput": 92.35414860000586,
+    "query_throughput": 414.6408350926077
+  }
+}

@@ -4,7 +4,18 @@ Benchmarks embedding models for Uzbek retrieval-augmented generation (RAG) on
 a dataset of **7,078 passages and 2,017 queries** drawn from real Uzbek news
 articles. Each query comes with one positive passage and three hard negatives.
 
-See [REPORT.md](REPORT.md) for the full results and recommendations.
+**Latest run: 25 models on NVIDIA RTX 5070 (CUDA).** See
+[REPORT.md](REPORT.md) for the full results and recommendations.
+
+### Headline numbers (top 5 by MRR)
+
+| # | Model | MRR | Discrim. Rate | ms/text |
+|---|---|---:|---:|---:|
+| 1 | `gemini-embedding-001` (API) | **0.9104** | 0.9861 | 67.9 |
+| 2 | `microsoft/harrier-oss-v1-0.6b` | **0.8367** | **0.9901** |  5.1 |
+| 3 | `BAAI/bge-m3` | **0.8342** | 0.9638 |  5.1 |
+| 4 | `nomic-ai/nomic-embed-text-v2-moe` | 0.8181 | 0.9598 |  2.5 |
+| 5 | `BAAI/bge-m3-unsupervised` | 0.8174 | 0.9584 |  5.1 |
 
 ## TL;DR — two commands
 
@@ -58,7 +69,7 @@ mounted from `~/.cache/huggingface` so downloaded weights are reused across
 runs and across any other project sharing the cache.
 
 GPU requirements (Linux only):
-- NVIDIA driver
+- NVIDIA driver (tested against RTX 5070 / CUDA 12.8)
 - [nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
   so Docker can see the GPU
 
@@ -104,7 +115,7 @@ python run.py bench gemini-embedding-001
 
 ```bash
 # Only benchmark a subset
-python run.py bench-all --only bge-m3,multilingual-e5-large,embeddinggemma-300m
+python run.py bench-all --only bge-m3,harrier-oss-v1-0.6b,nomic-embed-text-v2-moe
 
 # Skip specific models
 python run.py bench-all --skip tahrirchi-bert-base
@@ -132,6 +143,7 @@ models:
     passage_prompt_name: document
     st_task: retrieval               # optional — ST task kwarg
     batch_size: 16                   # optional — override default 32
+    transliterate: latin2cyrillic    # optional — Cyrillic-only models
 ```
 
 Then:
@@ -140,6 +152,16 @@ Then:
 python run.py bench my-new-model
 ```
 
+## Hardware used for the numbers in REPORT.md
+
+- **GPU:** NVIDIA RTX 5070 (Blackwell, 12 GB VRAM)
+- **Container runtime:** `Dockerfile.gpu` (pytorch/pytorch CUDA 12.8 runtime)
+- 25 models ran end-to-end; no OOM or crash failures
+
+Apple Silicon (MPS) and CPU paths work the same — only the per-model
+`ms/text` and throughput change. Retrieval metrics are
+hardware-independent.
+
 ## Known issues
 
 ### KaLM-embedding-multilingual-mini-instruct-v2.5 needs transformers v4
@@ -147,7 +169,7 @@ python run.py bench my-new-model
 This model ships a custom `modeling.py` written against `transformers==4.45`.
 On `transformers>=5.0` it still loads (no crash), but the v4-era attention-mask
 internals it imports behave differently under v5, silently producing
-near-random embeddings (MRR ~0.01 instead of ~0.5+).
+near-random embeddings (MRR ~0.01 instead of ~0.68).
 
 The rest of the benchmark is happy on v5, so we don't pin globally. Run this
 one model in a throwaway container with a v4 downgrade:

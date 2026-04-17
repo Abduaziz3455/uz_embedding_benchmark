@@ -1,0 +1,16 @@
+{
+  "model_name": "jina-embeddings-v5-text-small",
+  "embedding_dim": 1024,
+  "dataset": "/app/dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "num_with_hard_negatives": 2017,
+  "hard_negative_metrics": {
+    "triplet_accuracy": 0.9575304758159654,
+    "discrimination_rate": 0.9157164105106594,
+    "avg_margin": 0.20415107104290106,
+    "restricted_mrr": 0.9543050735415632,
+    "positive_avg_rank": 14.633614278631631,
+    "hard_neg_avg_rank": 183.54338125929598
+  }
+}

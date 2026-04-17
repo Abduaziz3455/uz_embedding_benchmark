@@ -1,16 +1,16 @@
 {
   "model_name": "embeddinggemma-300m",
   "embedding_dim": 768,
-  "dataset": "dataset/uz_news_benchmark.json",
+  "dataset": "/app/dataset/uz_news_benchmark.json",
   "num_corpus": 7078,
   "num_queries": 2017,
   "num_with_hard_negatives": 2017,
   "hard_negative_metrics": {
     "triplet_accuracy": 0.8808493904836807,
     "discrimination_rate": 0.7793753098661378,
-    "avg_margin": 0.10130101684656366,
-    "restricted_mrr": 0.8773343249049743,
-    "positive_avg_rank": 142.02974714923153,
-    "hard_neg_avg_rank": 348.01735250371837
+    "avg_margin": 0.10130102506177995,
+    "restricted_mrr": 0.8773343249049733,
+    "positive_avg_rank": 142.0287555775905,
+    "hard_neg_avg_rank": 348.01586514625683
   }
 }

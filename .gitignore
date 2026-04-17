@@ -25,3 +25,5 @@ hf_cache/
 
 # Docker / build
 *.log
+
+old_results/

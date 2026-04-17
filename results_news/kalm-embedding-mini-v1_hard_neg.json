@@ -1,0 +1,16 @@
+{
+  "model_name": "KaLM-embedding-multilingual-mini-v1",
+  "embedding_dim": 896,
+  "dataset": "/app/dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "num_with_hard_negatives": 2017,
+  "hard_negative_metrics": {
+    "triplet_accuracy": 0.9418010224144711,
+    "discrimination_rate": 0.8914229053049083,
+    "avg_margin": 0.12933732633491407,
+    "restricted_mrr": 0.9399686002313664,
+    "positive_avg_rank": 56.05503222607833,
+    "hard_neg_avg_rank": 399.51214675260286
+  }
+}

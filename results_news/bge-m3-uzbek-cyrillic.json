@@ -1,0 +1,26 @@
+{
+  "model_name": "bge-m3-uzbek-cyrillic",
+  "embedding_dim": 1024,
+  "dataset": "/app/dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "timestamp": "2026-04-17T20:05:58.172999",
+  "metrics": {
+    "mrr": 0.5965942602257672,
+    "hit_rate@1": 0.4853743182944968,
+    "recall@1": 0.4853743182944968,
+    "ndcg@1": 0.4853743182944968,
+    "hit_rate@3": 0.6633614278631631,
+    "recall@3": 0.6633614278631631,
+    "ndcg@3": 0.5900119338674868,
+    "hit_rate@5": 0.7248388696083292,
+    "recall@5": 0.7248388696083292,
+    "ndcg@5": 0.6155111031353867,
+    "hit_rate@10": 0.80466038671294,
+    "recall@10": 0.80466038671294,
+    "ndcg@10": 0.6411415322595304,
+    "avg_latency_ms": 7.29991713351375,
+    "corpus_throughput": 114.16035379842134,
+    "query_throughput": 459.21922594638806
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "model_name": "nomic-embed-text-v2-moe",
+  "embedding_dim": 768,
+  "dataset": "/app/dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "timestamp": "2026-04-17T18:50:28.915286",
+  "metrics": {
+    "mrr": 0.8180695029083911,
+    "hit_rate@1": 0.7431829449677739,
+    "recall@1": 0.7431829449677739,
+    "ndcg@1": 0.7431829449677739,
+    "hit_rate@3": 0.8740704015865146,
+    "recall@3": 0.8740704015865146,
+    "ndcg@3": 0.8205057733780758,
+    "hit_rate@5": 0.9127416955875062,
+    "recall@5": 0.9127416955875062,
+    "ndcg@5": 0.8364435957638189,
+    "hit_rate@10": 0.9504214179474467,
+    "recall@10": 0.9504214179474467,
+    "ndcg@10": 0.8486910112464694,
+    "avg_latency_ms": 2.5514113297455583,
+    "corpus_throughput": 333.4935728648853,
+    "query_throughput": 1018.0242695649699
+  }
+}

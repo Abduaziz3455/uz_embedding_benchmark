@@ -1,0 +1,16 @@
+{
+  "model_name": "tahrirchi-bert-base",
+  "embedding_dim": 768,
+  "dataset": "/app/dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "num_with_hard_negatives": 2017,
+  "hard_negative_metrics": {
+    "triplet_accuracy": 0.6179709005112073,
+    "discrimination_rate": 0.4303420922161626,
+    "avg_margin": -0.009893625487061379,
+    "restricted_mrr": 0.6569575276813737,
+    "positive_avg_rank": 606.4442240951909,
+    "hard_neg_avg_rank": 309.5324739712444
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "model_name": "ModernUzBERT",
+  "embedding_dim": 768,
+  "dataset": "/app/dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "timestamp": "2026-04-17T20:03:59.377036",
+  "metrics": {
+    "mrr": 0.39050014394485294,
+    "hit_rate@1": 0.285572632622707,
+    "recall@1": 0.285572632622707,
+    "ndcg@1": 0.285572632622707,
+    "hit_rate@3": 0.43579573624194345,
+    "recall@3": 0.43579573624194345,
+    "ndcg@3": 0.37262819764856114,
+    "hit_rate@5": 0.503222607833416,
+    "recall@5": 0.503222607833416,
+    "ndcg@5": 0.400494102136753,
+    "hit_rate@10": 0.6013882002974715,
+    "recall@10": 0.6013882002974715,
+    "ndcg@10": 0.4321149624791948,
+    "avg_latency_ms": 1.8651586867676389,
+    "corpus_throughput": 450.8277244792216,
+    "query_throughput": 1596.2231648251952
+  }
+}

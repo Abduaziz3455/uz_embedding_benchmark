@@ -1,0 +1,16 @@
+{
+  "model_name": "harrier-oss-v1-0.6b",
+  "embedding_dim": 1024,
+  "dataset": "/app/dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "num_with_hard_negatives": 2017,
+  "hard_negative_metrics": {
+    "triplet_accuracy": 0.9948879276445144,
+    "discrimination_rate": 0.9900842835894893,
+    "avg_margin": 0.1690607852107177,
+    "restricted_mrr": 0.9945876714592629,
+    "positive_avg_rank": 3.243926623698562,
+    "hard_neg_avg_rank": 436.5999008428359
+  }
+}

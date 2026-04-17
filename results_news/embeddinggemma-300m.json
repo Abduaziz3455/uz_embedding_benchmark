@@ -1,26 +1,26 @@
 {
   "model_name": "embeddinggemma-300m",
   "embedding_dim": 768,
-  "dataset": "dataset/uz_news_benchmark.json",
+  "dataset": "/app/dataset/uz_news_benchmark.json",
   "num_corpus": 7078,
   "num_queries": 2017,
-  "timestamp": "2026-04-16T20:19:27.979671",
+  "timestamp": "2026-04-17T17:42:54.679962",
   "metrics": {
-    "mrr": 0.42893494156125417,
+    "mrr": 0.428935192094249,
     "hit_rate@1": 0.3371343579573624,
     "recall@1": 0.3371343579573624,
     "ndcg@1": 0.3371343579573624,
     "hit_rate@3": 0.47000495785820523,
     "recall@3": 0.47000495785820523,
-    "ndcg@3": 0.4147347137403523,
+    "ndcg@3": 0.4147347137403516,
     "hit_rate@5": 0.5309866137828458,
     "recall@5": 0.5309866137828458,
-    "ndcg@5": 0.43978136054057626,
+    "ndcg@5": 0.4397813605405755,
     "hit_rate@10": 0.6033713435795737,
     "recall@10": 0.6033713435795737,
-    "ndcg@10": 0.4633755728947848,
-    "avg_latency_ms": 15.160684442001566,
-    "corpus_throughput": 55.253181873725104,
-    "query_throughput": 206.12751334645898
+    "ndcg@10": 0.46337557289478387,
+    "avg_latency_ms": 3.4110367002191944,
+    "corpus_throughput": 246.07027206669295,
+    "query_throughput": 892.7789736616929
   }
 }

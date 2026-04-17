@@ -1,0 +1,16 @@
+{
+  "model_name": "Octen-Embedding-0.6B",
+  "embedding_dim": 1024,
+  "dataset": "/app/dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "num_with_hard_negatives": 2017,
+  "hard_negative_metrics": {
+    "triplet_accuracy": 0.9419976405819898,
+    "discrimination_rate": 0.8844819038175508,
+    "avg_margin": 0.16333129046781264,
+    "restricted_mrr": 0.9374070401586512,
+    "positive_avg_rank": 46.22954883490332,
+    "hard_neg_avg_rank": 356.52751611303916
+  }
+}

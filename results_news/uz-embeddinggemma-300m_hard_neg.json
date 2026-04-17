@@ -1,0 +1,16 @@
+{
+  "model_name": "uz_embeddinggemma-300m",
+  "embedding_dim": 768,
+  "dataset": "/app/dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "num_with_hard_negatives": 2017,
+  "hard_negative_metrics": {
+    "triplet_accuracy": 0.8777034998033818,
+    "discrimination_rate": 0.7699553792761527,
+    "avg_margin": 0.1286727265040651,
+    "restricted_mrr": 0.8728309370352,
+    "positive_avg_rank": 148.67278135845314,
+    "hard_neg_avg_rank": 408.6846802181458
+  }
+}

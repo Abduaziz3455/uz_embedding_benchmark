@@ -1,16 +1,16 @@
 {
   "model_name": "gemini-embedding-001",
   "embedding_dim": 3072,
-  "dataset": "dataset/uz_news_benchmark.json",
+  "dataset": "/app/dataset/uz_news_benchmark.json",
   "num_corpus": 7078,
   "num_queries": 2017,
   "num_with_hard_negatives": 2017,
   "hard_negative_metrics": {
     "triplet_accuracy": 0.9942980731419583,
     "discrimination_rate": 0.9861179970252851,
-    "avg_margin": 0.12709334636006428,
-    "restricted_mrr": 0.9929763675425549,
+    "avg_margin": 0.12709333409634213,
+    "restricted_mrr": 0.992976367542555,
     "positive_avg_rank": 1.6063460585027267,
-    "hard_neg_avg_rank": 106.84581060981655
+    "hard_neg_avg_rank": 106.8468021814576
   }
 }

@@ -1,16 +1,16 @@
 {
   "model_name": "multilingual-e5-large",
   "embedding_dim": 1024,
-  "dataset": "dataset/uz_news_benchmark.json",
+  "dataset": "/app/dataset/uz_news_benchmark.json",
   "num_corpus": 7078,
   "num_queries": 2017,
   "num_with_hard_negatives": 2017,
   "hard_negative_metrics": {
     "triplet_accuracy": 0.9825009830908376,
     "discrimination_rate": 0.9643034209221616,
-    "avg_margin": 0.047999158169174765,
-    "restricted_mrr": 0.9807882994546356,
-    "positive_avg_rank": 6.090233019335647,
-    "hard_neg_avg_rank": 234.941497273178
+    "avg_margin": 0.04799914138412854,
+    "restricted_mrr": 0.9807882994546353,
+    "positive_avg_rank": 6.091224590976698,
+    "hard_neg_avg_rank": 234.93901834407535
   }
 }

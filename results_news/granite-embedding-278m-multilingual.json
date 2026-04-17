@@ -1,0 +1,26 @@
+{
+  "model_name": "granite-embedding-278m-multilingual",
+  "embedding_dim": 768,
+  "dataset": "/app/dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "timestamp": "2026-04-17T20:03:18.768525",
+  "metrics": {
+    "mrr": 0.600453416970673,
+    "hit_rate@1": 0.5047099652949926,
+    "recall@1": 0.5047099652949926,
+    "ndcg@1": 0.5047099652949926,
+    "hit_rate@3": 0.6569162121963312,
+    "recall@3": 0.6569162121963312,
+    "ndcg@3": 0.5940553642680106,
+    "hit_rate@5": 0.7134357957362419,
+    "recall@5": 0.7134357957362419,
+    "ndcg@5": 0.6172454826745096,
+    "hit_rate@10": 0.7749132374814081,
+    "recall@10": 0.7749132374814081,
+    "ndcg@10": 0.6372131319090844,
+    "avg_latency_ms": 0.5636361712787491,
+    "corpus_throughput": 1547.7633584331702,
+    "query_throughput": 3645.92432967353
+  }
+}

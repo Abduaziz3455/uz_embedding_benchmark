@@ -1,0 +1,16 @@
+{
+  "model_name": "bge-m3-uzbek-cyrillic",
+  "embedding_dim": 1024,
+  "dataset": "/app/dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "num_with_hard_negatives": 2017,
+  "hard_negative_metrics": {
+    "triplet_accuracy": 0.9665749115218246,
+    "discrimination_rate": 0.932077342588002,
+    "avg_margin": 0.19522544470498865,
+    "restricted_mrr": 0.9633944802511978,
+    "positive_avg_rank": 13.918691125433812,
+    "hard_neg_avg_rank": 439.81606346058504
+  }
+}

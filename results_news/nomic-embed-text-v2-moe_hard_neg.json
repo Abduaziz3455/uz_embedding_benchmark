@@ -1,0 +1,16 @@
+{
+  "model_name": "nomic-embed-text-v2-moe",
+  "embedding_dim": 768,
+  "dataset": "/app/dataset/uz_news_benchmark.json",
+  "num_corpus": 7078,
+  "num_queries": 2017,
+  "num_with_hard_negatives": 2017,
+  "hard_negative_metrics": {
+    "triplet_accuracy": 0.9815178922532442,
+    "discrimination_rate": 0.9598413485374319,
+    "avg_margin": 0.21749109689499047,
+    "restricted_mrr": 0.9788877871426207,
+    "positive_avg_rank": 3.6479920674268715,
+    "hard_neg_avg_rank": 200.95438770451165
+  }
+}

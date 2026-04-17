@@ -1,16 +1,16 @@
 {
   "model_name": "Qwen3-Embedding-0.6B",
   "embedding_dim": 1024,
-  "dataset": "dataset/uz_news_benchmark.json",
+  "dataset": "/app/dataset/uz_news_benchmark.json",
   "num_corpus": 7078,
   "num_queries": 2017,
   "num_with_hard_negatives": 2017,
   "hard_negative_metrics": {
-    "triplet_accuracy": 0.9012976799056233,
-    "discrimination_rate": 0.8215171046108082,
-    "avg_margin": 0.11854750370855194,
-    "restricted_mrr": 0.8998512642538423,
-    "positive_avg_rank": 95.27863163113535,
-    "hard_neg_avg_rank": 314.52354982647495
+    "triplet_accuracy": 0.9007078254030673,
+    "discrimination_rate": 0.8190381755081805,
+    "avg_margin": 0.11854637713791653,
+    "restricted_mrr": 0.8988183771277468,
+    "positive_avg_rank": 95.23202776400595,
+    "hard_neg_avg_rank": 314.6936043629152
   }
 }

@@ -140,6 +140,28 @@ Then:
 python run.py bench my-new-model
 ```
 
+## Known issues
+
+### KaLM-embedding-multilingual-mini-instruct-v2.5 needs transformers v4
+
+This model ships a custom `modeling.py` written against `transformers==4.45`.
+On `transformers>=5.0` it still loads (no crash), but the v4-era attention-mask
+internals it imports behave differently under v5, silently producing
+near-random embeddings (MRR ~0.01 instead of ~0.5+).
+
+The rest of the benchmark is happy on v5, so we don't pin globally. Run this
+one model in a throwaway container with a v4 downgrade:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.gpu.yml run --rm \
+  --entrypoint bash benchmark -c "\
+    pip install 'transformers>=4.45,<5' 'sentence-transformers<4' && \
+    python run.py bench kalm-embedding-mini-instruct-v2.5 --force"
+```
+
+`--rm` tears down the container after the run, so your main image keeps v5 and
+other models are unaffected.
+
 ## Regenerating the dataset
 
 The dataset is already checked in at `dataset/uz_news_benchmark.json`. If you

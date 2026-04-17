@@ -5,6 +5,9 @@ pyyaml>=6.0
 # Local HF models
 sentence-transformers>=3.0.0
 transformers>=4.40.0
+# Note: KaLM-embedding-multilingual-mini-instruct-v2.5 ships a custom modeling.py
+# written against transformers 4.45. On transformers v5+ it loads without error
+# but produces near-random embeddings (MRR ~0.01). See README "Known issues".
 peft>=0.11.0  # required by jina-embeddings-v5 custom modeling code
 einops>=0.7.0  # required by nomic-embed-text-v2-moe custom modeling code
 

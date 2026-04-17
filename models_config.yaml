@@ -34,6 +34,7 @@ models:
   harrier-oss-v1-0.6b:
     hf_name: microsoft/harrier-oss-v1-0.6b
     trust_remote_code: true
+    query_prompt_name: web_search_query
 
   multilingual-e5-base:
     hf_name: intfloat/multilingual-e5-base
@@ -80,6 +81,7 @@ models:
   gte-multilingual-base:
     hf_name: Alibaba-NLP/gte-multilingual-base
     trust_remote_code: true
+    max_seq_length: 8192
 
   kalm-embedding-mini-instruct-v2.5:
     hf_name: KaLM-Embedding/KaLM-embedding-multilingual-mini-instruct-v2.5

@@ -16,6 +16,56 @@ def _lazy_st():
     return SentenceTransformer
 
 
+_COMPAT_APPLIED = False
+
+
+def _apply_transformers_v5_compat():
+    """Re-expose `config.rope_theta` on Qwen2-family configs.
+
+    transformers v5 moved rope_theta into `config.rope_parameters`, but several
+    models shipped with `trust_remote_code=True` (e.g. KaLM v2.5) still read
+    `config.rope_theta` directly. We add it back as a read-only property that
+    falls through to rope_parameters, so those custom modeling files keep working.
+    """
+    global _COMPAT_APPLIED
+    if _COMPAT_APPLIED:
+        return
+    _COMPAT_APPLIED = True
+
+    def _rope_theta_getter(self):
+        params = getattr(self, "rope_parameters", None)
+        if params is None:
+            return 1000000.0
+        if isinstance(params, dict):
+            return params.get("rope_theta", 1000000.0)
+        return getattr(params, "rope_theta", 1000000.0)
+
+    candidates = [
+        ("transformers.models.qwen2.configuration_qwen2", "Qwen2Config"),
+        ("transformers.models.qwen3.configuration_qwen3", "Qwen3Config"),
+    ]
+    for module_path, cls_name in candidates:
+        try:
+            module = __import__(module_path, fromlist=[cls_name])
+            cls = getattr(module, cls_name, None)
+        except ImportError:
+            continue
+        if cls is None:
+            continue
+        try:
+            probe = cls()
+        except Exception:
+            probe = None
+        if probe is not None and hasattr(probe, "rope_theta"):
+            continue  # native attribute still works (transformers v4)
+        if "rope_theta" in cls.__dict__:
+            continue
+        try:
+            setattr(cls, "rope_theta", property(_rope_theta_getter))
+        except (TypeError, AttributeError):
+            pass
+
+
 class GeminiEmbeddingClient:
     """Client for Google Gemini embedding API."""
 
@@ -90,8 +140,10 @@ class SentenceTransformerClient:
         batch_size: int = 32,
         device: str | None = None,
         trust_remote_code: bool = False,
+        max_seq_length: int | None = None,
     ):
         SentenceTransformer = _lazy_st()
+        _apply_transformers_v5_compat()
         import torch
 
         if device is None:
@@ -105,9 +157,12 @@ class SentenceTransformerClient:
         self.model = SentenceTransformer(
             model_name, device=device, trust_remote_code=trust_remote_code
         )
+        if max_seq_length is not None:
+            self.model.max_seq_length = max_seq_length
         self.model_name = model_name
         self.batch_size = batch_size
         self.device = device
+        self.max_seq_length = getattr(self.model, "max_seq_length", None)
         self.name = model_name.split("/")[-1]
 
     def embed(

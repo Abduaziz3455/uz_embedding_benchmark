@@ -110,6 +110,11 @@ def cmd_bench(args):
         console.print("Available: " + ", ".join(config["models"].keys()))
         sys.exit(1)
     spec = config["models"][args.model]
+    out_name = f"{args.model}_hard_neg.json" if args.hard else f"{args.model}.json"
+    output_path = RESULTS_DIR / out_name
+    if output_path.exists() and not args.force:
+        console.print(f"[yellow]↷ {args.model}: result already exists at {output_path}, skipping (use --force to re-run)[/yellow]")
+        return
     cmd = build_cmd(args.model, spec, hard=args.hard, dataset=args.dataset, batch_override=args.batch_size)
     console.print(f"[bold cyan]→ {' '.join(cmd)}[/bold cyan]")
     raise SystemExit(subprocess.call(cmd))
@@ -130,9 +135,16 @@ def cmd_bench_all(args):
 
     console.print(f"[bold green]Running {len(keys)} model(s){' (hard-negative)' if args.hard else ''}[/bold green]")
     failures = []
+    skipped = []
     for i, key in enumerate(keys, 1):
         spec = config["models"][key]
         console.rule(f"[{i}/{len(keys)}] {key}")
+        out_name = f"{key}_hard_neg.json" if args.hard else f"{key}.json"
+        output_path = RESULTS_DIR / out_name
+        if output_path.exists() and not args.force:
+            console.print(f"[yellow]↷ {key}: result already exists at {output_path}, skipping (use --force to re-run)[/yellow]")
+            skipped.append(key)
+            continue
         cmd = build_cmd(key, spec, hard=args.hard, dataset=args.dataset, batch_override=args.batch_size)
         rc = subprocess.call(cmd)
         if rc != 0:
@@ -141,6 +153,8 @@ def cmd_bench_all(args):
             if not args.keep_going:
                 sys.exit(rc)
     console.rule("Done")
+    if skipped:
+        console.print(f"[yellow]Skipped (already done): {', '.join(skipped)}[/yellow]")
     if failures:
         console.print(f"[red]Failed: {', '.join(failures)}[/red]")
         sys.exit(1)
@@ -220,6 +234,7 @@ def main():
     p_bench.add_argument("--hard", action="store_true", help="Run hard-negative analysis instead of standard metrics")
     p_bench.add_argument("--dataset", default=str(DEFAULT_DATASET))
     p_bench.add_argument("--batch-size", type=int, default=None)
+    p_bench.add_argument("--force", action="store_true", help="Re-run even if a result file already exists")
 
     p_all = sub.add_parser("bench-all", help="Benchmark every configured model")
     p_all.add_argument("--hard", action="store_true")
@@ -228,6 +243,7 @@ def main():
     p_all.add_argument("--dataset", default=str(DEFAULT_DATASET))
     p_all.add_argument("--batch-size", type=int, default=None)
     p_all.add_argument("--keep-going", action="store_true", help="Continue even if a model fails")
+    p_all.add_argument("--force", action="store_true", help="Re-run even if a result file already exists")
 
     p_cmp = sub.add_parser("compare", help="Compare all saved results")
     p_cmp.add_argument("--hard", action="store_true", help="Compare hard-negative results")

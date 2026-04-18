@@ -5,8 +5,9 @@
 For a self-hosted Uzbek RAG pipeline, **`harrier-oss-v1-0.6b`** is the new top
 open model: it wins both standard retrieval (MRR 0.8367) **and** hard-negative
 discrimination (99.01% — the highest of any model, beating even Gemini).
-**`BAAI/bge-m3`** remains the safest workhorse: near-tied on quality, widest
-margin (0.183), 8K context, and very stable. If you're willing to pay for
+**`BAAI/bge-m3`** remains the safest workhorse: near-tied on quality
+(MRR 0.8342, 96.4% discrimination), 8K context, no prompt quirks, and a
+long track record. If you're willing to pay for
 API quality, `gemini-embedding-001` still sets the ceiling on raw MRR but is
 slightly behind `harrier-oss-v1-0.6b` on discrimination.
 
@@ -132,10 +133,9 @@ all 3 hard negatives).
    model on MRR (0.8367) *and* the top model overall on discrimination
    (99.01%) — even ahead of Gemini (98.61%). It also has the smallest average
    positive-rank of any open model (3.2).
-2. **`bge-m3` is still the stable default.** MRR within 0.003 of harrier, the
-   widest margin among established models (0.183), and a long track record
-   with 8K context. If you want one model that will not surprise you,
-   pick this.
+2. **`bge-m3` is still the stable default.** MRR within 0.003 of harrier,
+   96.4% discrimination, 8K context, no prompt quirks, and a long track
+   record. If you want one model that will not surprise you, pick this.
 3. **`nomic-embed-text-v2-moe` is the efficiency pick.** 768-dim MoE model
    that lands in the top 5 on MRR, has the widest margin of *any* model
    (0.2175), and runs at 2.55 ms/text on the 5070 — the fastest non-tiny
@@ -166,7 +166,7 @@ all 3 hard negatives).
 | Use case | Model | Why |
 |----------|-------|-----|
 | **Self-hosted RAG (new default)** | **`microsoft/harrier-oss-v1-0.6b`** | Highest open-model MRR (0.8367), highest discrimination of any model (99%), 5 ms/text on RTX 5070 |
-| **Self-hosted RAG (safe default)** | **`BAAI/bge-m3`** | Tied on quality (MRR 0.8342, 96% disc.), widest stable margin (0.18), 8K context, no prompt quirks |
+| **Self-hosted RAG (safe default)** | **`BAAI/bge-m3`** | Tied on quality (MRR 0.8342, 96.4% disc.), 8K context, no prompt quirks, long track record |
 | **Efficiency / 768-dim index** | `nomic-ai/nomic-embed-text-v2-moe` | MRR 0.8181, widest margin (0.22), 2.5 ms/text, MoE |
 | **Maximum quality** | `gemini-embedding-001` | 0.9104 MRR — but API cost and ~13× slower than top open models |
 | **Smallest footprint** | `intfloat/multilingual-e5-small` | 0.60 MRR at 0.6 ms/text, 384d — good for constrained infra |

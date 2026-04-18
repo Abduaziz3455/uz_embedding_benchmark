@@ -38,6 +38,11 @@ Latencies below (`ms/text`) are GPU-side; they will be ~5–20× higher on CPU
 or Apple Silicon (MPS). Throughput cells in Part 1 come directly from the
 per-run `corpus_throughput` and `query_throughput` fields.
 
+> **Hardware disclaimer:** all three top open models are ≤0.6B
+> parameters, so you can comfortably run any of them on a 16 GB
+> M-series MacBook or any GPU with ≥6 GB VRAM (T4, RTX 3050, even
+> Colab's free tier). No A100 required.
+
 ## Part 1 — Standard Retrieval
 
 Retrieval over the full 7,078-passage corpus. Higher is better for

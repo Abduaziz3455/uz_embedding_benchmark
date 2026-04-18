@@ -162,6 +162,11 @@ Apple Silicon (MPS) and CPU paths work the same — only the per-model
 `ms/text` and throughput change. Retrieval metrics are
 hardware-independent.
 
+> **Hardware disclaimer:** all three top open models are ≤0.6B
+> parameters, so you can comfortably run any of them on a 16 GB
+> M-series MacBook or any GPU with ≥6 GB VRAM (T4, RTX 3050, even
+> Colab's free tier). No A100 required.
+
 ## Known issues
 
 ### KaLM-embedding-multilingual-mini-instruct-v2.5 needs transformers v4
